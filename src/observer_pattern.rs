@@ -1,5 +1,6 @@
 //!
 //! This mod is for practicing observer pattern in Rust
+//!
 //! TODO:
 //! Improve code, maybe remove <dyn Observer<>>
 //!
@@ -10,7 +11,9 @@ use crate::observer_pattern::observer::Observer;
 use crate::observer_pattern::subject::Subject;
 
 
-
+///
+/// A concrete observer
+///
 struct Obs(u8);
 
 impl Observer<u8> for Obs {
@@ -21,6 +24,9 @@ impl Observer<u8> for Obs {
     }
 }
 
+///
+/// A concrete subject
+///
 struct Subj
 {
     subscribers: Vec<Box<dyn Observer<u8>>>
@@ -42,6 +48,9 @@ impl Subject<u8> for Subj
     }
 }
 
+///
+/// A test function
+///
 pub fn test_observer_pattern()
 {
     let  ob1 = Obs(1);
@@ -50,4 +59,15 @@ pub fn test_observer_pattern()
     sub.register(Box::new(ob1));
     sub.register(Box::new(ob2));
     sub.notify_all();
+}
+
+#[cfg(test)]
+mod observer_pattern_test
+{
+    use super::*;
+    #[test]
+    fn test()
+    {
+        test_observer_pattern();
+    }
 }

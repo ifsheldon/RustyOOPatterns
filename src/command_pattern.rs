@@ -96,7 +96,9 @@ impl<'a> RemoteControl<'a>
 ///
 /// A simple test
 /// # notice
+///
 /// &mut here is not so appropriate as no other way can reference the value after mut&
+///
 /// can use Rc, RefCell, Cell, Arc, Mutex
 ///
 pub fn test()
@@ -110,4 +112,16 @@ pub fn test()
     remote.set_command(1, Some(Box::new(l2switch)), None);
     remote.on_button_pressed(0);
     remote.on_button_pressed(1);
+}
+
+#[cfg(test)]
+mod command_pattern_test
+{
+    use super::*;
+    //cargo test -- --nocapture
+    #[test]
+    fn cptest()
+    {
+        test();
+    }
 }
