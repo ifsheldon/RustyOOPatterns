@@ -1,5 +1,9 @@
 # Rusty Design Pattern Implementation Samples
 
+## Note
+
+Though these codes are simple, I think it's a good way to get familiar with Rust, especially some tricks and features only belonged to Rust, like **lifetime** with references. 
+
 ## Reference
 
 Most but not all of the examples are from the book *Head First Design Pattern* which is reallllly juicy and worth reading.
