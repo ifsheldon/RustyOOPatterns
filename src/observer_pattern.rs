@@ -1,8 +1,6 @@
 //!
 //! This mod is for practicing observer pattern in Rust
 //!
-//! TODO:
-//! Improve code, maybe remove <dyn Observer<>>
 //!
 pub mod observer;
 pub mod subject;
