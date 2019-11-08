@@ -1,8 +1,13 @@
 //!
 //! # This is a mod for learning implementation of Command Pattern in Rust
+//!
 //! related trouble shooting discussion at https://users.rust-lang.org/t/command-pattern-in-rust-and-lifetime-issues/34368/3
 //!
+//! Examples from *Head First Design Pattern*
 //!
+//!**Pay extra attention to lifetime when references are used**
+//!
+//! Reference for lifetime: https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html
 pub mod receivers;
 pub mod commands;
 
@@ -25,7 +30,8 @@ impl<'a> RemoteControl<'a>
 {
     ///
     /// Constructor of RemoteControl
-    /// # Learned
+    ///
+    /// # Notice
     /// 1. the return type is recommended to be Self no matter when lifetime is in play
     /// 2. array construction [value; length] needs the value to be implemented Copy trait
     /// 3. Option<T> is not implemented Copy trait, so cannot use [value; length] to construct an Option array
@@ -40,7 +46,9 @@ impl<'a> RemoteControl<'a>
 
     ///
     /// For setting a command
-    /// # Learned
+    ///
+    /// # Notice
+    ///
     /// array index must to be *usize*
     ///
     pub fn set_command(&mut self, slot: usize, on_command: Option<Box<dyn MutCommand + 'a>>, off_command: Option<Box<dyn MutCommand + 'a>>)
@@ -52,7 +60,8 @@ impl<'a> RemoteControl<'a>
 
     ///
     /// For on button press
-    /// # Learned
+    ///
+    /// # Notice
     /// match can use & and mut&, just as initializing a variable
     ///
     pub fn on_button_pressed(&mut self, slot: usize)
@@ -95,6 +104,7 @@ impl<'a> RemoteControl<'a>
 
 ///
 /// A simple test
+///
 /// # notice
 ///
 /// &mut here is not so appropriate as no other way can reference the value after mut&
@@ -114,6 +124,9 @@ pub fn test()
     remote.on_button_pressed(1);
 }
 
+///
+/// A test mod
+///
 #[cfg(test)]
 mod command_pattern_test
 {

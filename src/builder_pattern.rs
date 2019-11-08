@@ -1,4 +1,5 @@
 //! This mod is for demonstrating the builder pattern in Rust
+//!
 //! # This module is for learning a pattern that's effective to model a workflow and is special because of Rust
 //! ## Modelling a post publishing workflow
 //! empty draft --add_content--> draft --review--> reviewed post --approve--> post
