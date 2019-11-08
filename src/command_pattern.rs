@@ -8,6 +8,8 @@
 //!**Pay extra attention to lifetime when references are used**
 //!
 //! Reference for lifetime: https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html
+//!
+//! Further Improvement: implement Command Pattern with Null Object Pattern to eliminate `match`
 pub mod receivers;
 pub mod commands;
 
