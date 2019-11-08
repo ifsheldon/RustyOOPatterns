@@ -20,6 +20,14 @@ Please run `cargo doc --open` in the root of this directory to see the auto-gene
 
 For you can see the static type inference of Rust, which is really helpful
 
+## Run
+
+In each sub mod of `lib.rs`, there is a test mod. You can run the test mod to compile and run codes of specific patterns without bothering running `main()` and compiling all codes.
+
+### Potential Issues
+
+May need to modify the package name in `Cargo.lock` and `Cargo.toml` to get the compilation right.
+
 ## TODO
 
 Implement more patterns
