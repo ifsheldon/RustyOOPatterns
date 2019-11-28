@@ -7,3 +7,5 @@ pub mod strategy_pattern;
 pub mod singleton_pattern;
 pub mod decorator_pattern;
 pub mod template_method_pattern;
+pub mod iterator_pattern;
+pub mod composite_pattern;

@@ -8,5 +8,5 @@
 //!
 fn need_to_be_implemented()
 {
-
+    unimplemented!();
 }

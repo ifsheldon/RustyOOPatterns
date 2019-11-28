@@ -20,7 +20,7 @@ impl ITStaff for ITManager
     }
     fn get_salary(&self) -> u32
     {
-        30000
+        30000 + self.year_bonus
     }
 }
 

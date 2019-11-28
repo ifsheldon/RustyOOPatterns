@@ -5,12 +5,13 @@
 //!
 //! TODO: implement Singleton Pattern somehow
 //!
-use PatternsImpl::*;
-use PatternsImpl::decorator_pattern::decorators::{Milk, Condiment};
-use PatternsImpl::decorator_pattern::bases::Beverage;
+use std::rc::Rc;
 
 fn main()
 {
-    println!("Compile test")
+    let i = 1;
+    let rc1 = Rc::new(i);
+    let rc2 = rc1.clone();
+    println!("{}",rc1.eq(&rc2));
 }
 
