@@ -1,5 +1,18 @@
 # Rusty Design Pattern Implementation Samples
 
+## Implemented Design Patterns
+
+* Adapter Pattern
+* Builder Pattern
+* Command Pattern
+* Composite Pattern
+* Decorator Pattern
+* Factory Pattern
+* Iterator Pattern
+* Observer Pattern
+* Strategy Pattern
+* Template Method Pattern
+
 ## Note
 
 Though these codes are simple, I think it's a good way to get familiar with Rust, especially some tricks and features only belonged to Rust, like **lifetime** with references. 
