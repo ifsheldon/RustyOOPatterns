@@ -2,6 +2,9 @@ use std::fmt;
 use std::error::Error;
 use crate::composite_pattern::backbone::MenuComponent;
 
+///
+/// A customized Error indicating OpNotSupported
+///
 #[derive(Debug, Clone)]
 pub struct OpNotSupportedError;
 
@@ -21,16 +24,21 @@ impl Error for OpNotSupportedError
     }
 }
 
-pub type DynMenuIter = Box<dyn Iterator<Item=Box<dyn MenuComponent>>>;
+pub type DynMenuIter<'a> = Box<dyn Iterator<Item=&'a Box<dyn MenuComponent>> + 'a>;
 
-pub struct CompositeIterator
+///
+/// An iterator recursively iterates over the whole component tree
+///
+/// A lifetime indicator is needed as iterators give references
+///
+pub struct CompositeIterator<'a>
 {
-    stack: Vec<DynMenuIter>
+    stack: Vec<DynMenuIter<'a>>
 }
 
-impl CompositeIterator
+impl<'a> CompositeIterator<'a>
 {
-    pub fn new(iter: DynMenuIter) -> Self
+    pub fn new(iter: DynMenuIter<'a>) -> Self
     {
         let mut stack = Vec::new();
         stack.push(iter);
@@ -38,27 +46,26 @@ impl CompositeIterator
     }
 }
 
-impl Iterator for CompositeIterator
+impl<'a> Iterator for CompositeIterator<'a>
 {
-    type Item = Box<dyn MenuComponent>;
+    type Item = &'a Box<dyn MenuComponent>;
 
     fn next(&mut self) -> Option<Self::Item> {
-        // need to debug
-        match self.stack.last_mut() {
-            None => { return None },
-            Some(top) =>
+        match self.stack.last_mut() { // check whether the stack is empty
+            None => None,
+            Some(top) => // not empty then take the top of stack
                 {
-                    match top.next() {
-                        None => {
+                    match top.next() { // check whether a sub tree has been iterated over
+                        None => { // fully iterated
                             self.stack.pop();
-                            return self.next()
+                            self.next()
                         },
-                        Some(mut next_one) => {
-                            match next_one.get_iter() {
-                                None => { return Some(next_one); },
-                                Some(iter) => {
+                        Some(next_one) => { // not benn fully iterated
+                            match next_one.get_iter() { // check if has children
+                                None => Some(&next_one), //is leaf
+                                Some(iter) => { // is not leaf
                                     self.stack.push(iter);
-                                    return Some(next_one);
+                                    Some(&next_one)
                                 }
                             }
                         }

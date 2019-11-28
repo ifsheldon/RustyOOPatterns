@@ -1,8 +1,16 @@
+//!
+//! This mod contains main components for realizing the Composite Pattern
+//!
+//! Though most of time was spent to get codes in peripheries.rs gone through the compiler orz
+//!
+//!
 use std::collections::HashSet;
 use std::hash::{Hash, Hasher};
-use crate::composite_pattern::peripheries::{OpNotSupportedError, DynMenuIter, CompositeIterator};
+use crate::composite_pattern::peripheries::{OpNotSupportedError, DynMenuIter};
 
-
+///
+/// The "interface" for unifying components
+///
 pub trait MenuComponent
 {
     fn get_name(&self) -> &String;
@@ -13,9 +21,12 @@ pub trait MenuComponent
     fn get_component_num(&self) -> usize;
     fn add_component(&mut self, component: Box<dyn MenuComponent>) -> Result<(), OpNotSupportedError>;
     fn remove_component(&mut self, component: Box<dyn MenuComponent>) -> Result<bool, OpNotSupportedError>;
-    fn get_iter(&mut self) -> Option<DynMenuIter>;
+    fn get_iter(&self) -> Option<DynMenuIter>;
 }
 
+///
+/// Make the trait objects hashable
+///
 impl Hash for dyn MenuComponent
 {
     fn hash<H: Hasher>(&self, state: &mut H)
@@ -34,6 +45,9 @@ impl Hash for dyn MenuComponent
     }
 }
 
+///
+/// Make the trait object equally comparable
+///
 impl PartialEq for dyn MenuComponent
 {
     fn eq(&self, other: &Self) -> bool
@@ -46,9 +60,15 @@ impl PartialEq for dyn MenuComponent
     }
 }
 
+///
+/// Make the trait object equally comparable
+///
 impl Eq for dyn MenuComponent
 {}
 
+///
+/// The menu struct, which contains many MenuComponents
+///
 pub struct Menu
 {
     name: String,
@@ -108,13 +128,16 @@ impl MenuComponent for Menu
     fn remove_component(&mut self, component: Box<dyn MenuComponent>) -> Result<bool, OpNotSupportedError> {
         Ok(self.menu_components.remove(component.as_ref()))
     }
-    fn get_iter(&mut self) -> Option<DynMenuIter>
+    fn get_iter(&self) -> Option<DynMenuIter>
     {
-        let composite_iter = CompositeIterator::new(Box::new(self.menu_components.iter()));
-        Some(Box::new(composite_iter))
+        let iter = Box::new(self.menu_components.iter());
+        Some(Box::new(iter))
     }
 }
 
+///
+/// The struct for the leaves in the component tree
+///
 pub struct MenuItem
 {
     name: String,
@@ -174,7 +197,7 @@ impl MenuComponent for MenuItem
     fn remove_component(&mut self, _component: Box<dyn MenuComponent>) -> Result<bool, OpNotSupportedError> {
         Err(OpNotSupportedError {})
     }
-    fn get_iter(&mut self) -> Option<DynMenuIter>
+    fn get_iter(&self) -> Option<DynMenuIter>
     {
         None
     }
