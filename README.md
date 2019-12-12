@@ -11,6 +11,7 @@
 * Iterator Pattern
 * Observer Pattern
 * Strategy Pattern
+* State Pattern
 * Template Method Pattern
 
 ## Note
@@ -43,7 +44,8 @@ May need to modify the package name in `Cargo.lock` and `Cargo.toml` to get the 
 
 ## TODO
 
-Implement more patterns
+* Implement more patterns
+* Implement the tests of State Pattern
 
 ### Tough Ones
 

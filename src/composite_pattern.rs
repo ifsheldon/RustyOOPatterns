@@ -13,6 +13,8 @@
 //! * Implementing traits for a trait
 //! * Error implementation
 //! * Extra difficulty because the `Iterator` trait dose not have conventional `hasNext()` as other languages
+//! # More
+//! see https://raphlinus.github.io/personal/2018/05/08/ecs-ui.html
 pub mod backbone;
 pub mod peripheries;
 

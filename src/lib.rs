@@ -9,3 +9,4 @@ pub mod decorator_pattern;
 pub mod template_method_pattern;
 pub mod iterator_pattern;
 pub mod composite_pattern;
+pub mod state_pattern;
