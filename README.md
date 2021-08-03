@@ -14,6 +14,10 @@
 * State Pattern
 * Template Method Pattern
 
+## Update 2021/8/4
+
+Now the book and Rust have changed a lot in the past 2 years, some patterns may have cleaner implementations, but still technical components used in this repo are stainlessly useful.
+
 ## Note
 
 Though these codes are simple, I think it's a good way to get familiar with Rust, especially some tricks and features only belonged to Rust, like **lifetime** with references. 
@@ -37,10 +41,6 @@ For you can see the static type inference of Rust, which is really helpful
 ## Run
 
 In each sub mod of `lib.rs`, there is a test mod. You can run the test mod to compile and run codes of specific patterns without bothering running `main()` and compiling all codes.
-
-### Potential Issues
-
-May need to modify the package name in `Cargo.lock` and `Cargo.toml` to get the compilation right.
 
 ## TODO
 
